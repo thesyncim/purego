@@ -129,3 +129,36 @@ void stack_25_int64_exceeds(char *buf, size_t bufsize, int64_t a1, int64_t a2, i
     snprintf(buf, bufsize, "%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64 ":%" PRId64,
              a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25);
 }
+
+// Benchmark functions - minimal work to measure call overhead
+int64_t bench_noop(void) {
+    return 0;
+}
+
+int64_t bench_1int(int64_t a) {
+    return a;
+}
+
+int64_t bench_3int(int64_t a, int64_t b, int64_t c) {
+    return a + b + c;
+}
+
+int64_t bench_6int(int64_t a, int64_t b, int64_t c, int64_t d, int64_t e, int64_t f) {
+    return a + b + c + d + e + f;
+}
+
+int64_t bench_8int(int64_t a, int64_t b, int64_t c, int64_t d, int64_t e, int64_t f, int64_t g, int64_t h) {
+    return a + b + c + d + e + f + g + h;
+}
+
+double bench_1float(double a) {
+    return a;
+}
+
+double bench_3float(double a, double b, double c) {
+    return a + b + c;
+}
+
+double bench_mixed(int64_t a, double b, int64_t c, double d) {
+    return (double)a + b + (double)c + d;
+}

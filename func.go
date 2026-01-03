@@ -131,6 +131,10 @@ func RegisterFunc(fptr any, cfn uintptr) {
 	if cfn == 0 {
 		panic("purego: cfn is nil")
 	}
+	// Try zero-allocation typed path first for common signatures
+	if tryRegisterTyped(fptr, cfn) {
+		return
+	}
 	if ty.NumOut() == 1 && (ty.Out(0).Kind() == reflect.Float32 || ty.Out(0).Kind() == reflect.Float64) &&
 		runtime.GOARCH != "arm64" && runtime.GOARCH != "amd64" && runtime.GOARCH != "loong64" {
 		panic("purego: float returns are not supported")
